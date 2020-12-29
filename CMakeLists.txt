@@ -12,10 +12,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 add_library(imgui STATIC
-    backends/imgui_impl_dx11.cpp
-    backends/imgui_impl_dx11.h
-    backends/imgui_impl_win32.cpp
-    backends/imgui_impl_win32.h
     imconfig.h
     imgui.cpp
     imgui.h
@@ -28,11 +24,3 @@ add_library(imgui STATIC
 
 target_compile_features(imgui PRIVATE cxx_std_17)
 target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/backends)
-
-if (MSVC)
-	target_compile_options(imgui PRIVATE
-		"/MP"                      # Multi-processor compilation
-		"$<$<CONFIG:RELEASE>:/MT>" # Non-DLL CRT
-		"$<$<CONFIG:DEBUG>:/MTd>"  # Non-DLL CRT
-	)
-endif()
